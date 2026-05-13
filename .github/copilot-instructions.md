@@ -36,10 +36,12 @@ Use these instructions for all changes in this repository.
 - Preserve artifact names and expected output paths unless a coordinated CI change is made.
 
 ## Required Validation Before Finalizing Changes
-- Configure and build with in-tree SDK:
+- Configure and build in the Nix development shell when working against the in-tree Decode-Orc SDK:
+  - `nix develop`
   - `cmake -S . -B build -DORC_INTREE_SDK_DIR=<decode-orc checkout> -DBUILD_TESTS=ON`
   - `cmake --build build --parallel`
-  - `ctest --test-dir build --output-on-failure -C Release`
+  - `ctest --test-dir build --output-on-failure`
+  - `./scripts/package_local.sh build dist`
 - Ensure no private decode-orc include/link usage is introduced.
 - Ensure workflow changes remain compatible with all matrix OS entries.
 

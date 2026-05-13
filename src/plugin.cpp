@@ -30,7 +30,13 @@ ORC_STAGE_PLUGIN_EXPORT bool orc_register_stage_plugin(
     bool (*register_stage)(void* context, const char* stage_name, orc::OrcStageFactoryFn factory),
     const char** error_message)
 {
-    orc::plugin::set_services(services);
+    static orc::OrcPluginServices services_copy{};
+    if (services) {
+        services_copy = *services;
+        orc::plugin::set_services(&services_copy);
+    } else {
+        orc::plugin::set_services(nullptr);
+    }
 
     if (!register_stage) {
         if (error_message) {

@@ -67,13 +67,13 @@ ctest --test-dir build --output-on-failure -C Release
 ## Local Build (against in-tree decode-orc SDK)
 
 1. Clone decode-orc and this repository.
-2. Enter the Nix development shell (recommended):
+2. Enter the Nix development shell:
 
 ```bash
 nix develop
 ```
 
-3. Configure and build:
+3. Configure and build against the in-tree SDK checkout:
 
 ```bash
 cmake -S . -B build \
@@ -85,7 +85,7 @@ cmake --build build --parallel
 4. Run tests:
 
 ```bash
-ctest --test-dir build --output-on-failure -C Release
+ctest --test-dir build --output-on-failure
 ```
 
 5. Package local artifact:
@@ -93,6 +93,8 @@ ctest --test-dir build --output-on-failure -C Release
 ```bash
 ./scripts/package_local.sh build dist
 ```
+
+The packaged plugin is written to `dist/orc-plugin_nn-ntsc-chroma-sink_<platform>.<ext>` and can be copied into Decode-Orc's local plugin cache for smoke testing.
 
 ## Artifact Naming Contract
 

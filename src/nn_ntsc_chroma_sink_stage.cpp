@@ -887,9 +887,6 @@ std::optional<ColourFrameCarrier> NnNtscChromaSinkStage::get_colour_preview_carr
     uint64_t              frame_index,
     PreviewNavigationHint hint [[maybe_unused]]) const
 {
-    ORC_PLUGIN_LOG_DEBUG("NnNtscChromaSink: get_colour_preview_carrier called for frame {}",
-                  frame_index);
-
     std::shared_ptr<const VideoFieldRepresentation> local_input;
     {
         std::lock_guard<std::mutex> lock(cached_input_mutex_);
